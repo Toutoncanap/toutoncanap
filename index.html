@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Toutoncanap – Gestion</title>
+<meta name="theme-color" content="#0d1129">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Toutoncanap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--n:#0d1129;--n2:#161b3f;--n3:#20265a;--l:rgba(214,178,94,.22);--g:#d6b25e;--g2:#f1d48a;--gg:linear-gradient(135deg,#f6dc94,#d6b25e 45%,#a8812f);
+  --t:#f4ede0;--m:#b9b3c9;--d:#8a87a3;--w:#4aa3e8;--ok:#3fbf7f;--bad:#ff8a7a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,system-ui,sans-serif;background:var(--n);color:var(--t);min-height:100vh;padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+a{color:var(--g2)}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+header{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top);background:rgba(13,17,41,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--l)}
+header .wrap{display:flex;align-items:center;gap:10px;height:56px}
+.brand{font-family:Cinzel,serif;font-weight:800;letter-spacing:.06em;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:17px}
+.brand small{display:block;font-family:Manrope;font-size:10px;letter-spacing:.2em;color:var(--d);-webkit-text-fill-color:var(--d)}
+.ib{margin-left:auto;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);display:grid;place-items:center}
+.tabs{display:flex;gap:6px;padding:10px 0}
+.tab{flex:1;padding:11px;border-radius:12px;font-weight:800;font-size:15px;color:var(--m);background:rgba(255,255,255,.04);border:1px solid transparent}
+.tab.on{color:var(--g2);border-color:var(--g);background:rgba(214,178,94,.1)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 12px}
+.kpi{background:var(--n2);border:1px solid var(--l);border-radius:14px;padding:10px 8px;text-align:center}
+.kpi b{display:block;font-size:20px;font-weight:800}
+.kpi span{font-size:11px;color:var(--m)}
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--l);background:rgba(8,10,28,.6);margin-bottom:10px;font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 12px;border-radius:99px;border:1px solid var(--l);font-size:13px;font-weight:700;color:var(--m)}
+.chip.on{background:var(--gg);color:#21180a;border-color:transparent}
+.list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.card{display:block;width:100%;text-align:left;background:var(--n2);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:13px 14px}
+.card .r1{display:flex;align-items:center;gap:8px}
+.card .nm{font-weight:800;font-size:16px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .r2{display:flex;justify-content:space-between;gap:8px;margin-top:4px;color:var(--m);font-size:13.5px}
+.card .r2 b{color:var(--g2)}
+.pill{flex:none;font-size:11.5px;font-weight:800;padding:4px 9px;border-radius:99px;background:rgba(255,255,255,.08)}
+.s-Nouveau{background:rgba(74,163,232,.2);color:#9fd2ff}
+.s-À.rappeler,.s-Arappeler{background:rgba(255,170,80,.18);color:#ffc98a}
+.s-Confirmé{background:rgba(214,178,94,.2);color:var(--g2)}
+.s-Réalisé{background:rgba(180,140,255,.18);color:#d4c1ff}
+.s-Facturé,.s-Àpayer{background:rgba(255,138,122,.18);color:#ffb3a6}
+.s-Payé,.s-Payée{background:rgba(63,191,127,.18);color:#8fe3b6}
+.s-Annulé{background:rgba(255,255,255,.07);color:var(--d)}
+.empty{text-align:center;color:var(--d);padding:40px 0}
+.fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:30;padding:15px 20px;border-radius:99px;background:var(--gg);color:#21180a;font-weight:800;box-shadow:0 10px 30px rgba(214,178,94,.35)}
+/* sheet */
+.bg{position:fixed;inset:0;background:rgba(4,5,15,.7);z-index:50;opacity:0;pointer-events:none;transition:.2s}
+.bg.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-height:94vh;overflow-y:auto;background:linear-gradient(180deg,#1b2150,#11153a);border-top:1px solid #a8812f;border-radius:22px 22px 0 0;padding:8px 16px calc(24px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.sheet.on{transform:none}
+.sheet .in{max-width:680px;margin:0 auto}
+.grab{width:42px;height:5px;border-radius:3px;background:rgba(255,255,255,.2);margin:0 auto 12px}
+.sh{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.sh h2{font-size:21px;font-weight:800;flex:1}
+.sh .sub{font-size:13px;color:var(--d);font-weight:600}
+.x{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);font-size:20px;flex:none}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 14px}
+.act{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.06);font-size:12px;font-weight:700;text-decoration:none;color:var(--t)}
+.act svg{width:22px;height:22px;stroke:var(--g2)}
+.act.dis{opacity:.35;pointer-events:none}
+.sec{background:rgba(8,10,28,.45);border:1px solid var(--l);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.sec h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+.sec p,.sec li{font-size:14.5px;color:var(--m);line-height:1.5}
+.sec ul{list-style:none}
+.sec li{display:flex;justify-content:space-between;gap:10px}
+.sec li b{color:var(--t);font-weight:600}
+.lbl{display:block;font-size:12.5px;font-weight:700;color:var(--m);margin:10px 0 5px}
+.in-f{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--l);background:rgba(8,10,28,.6);font-size:16px}
+textarea.in-f{min-height:70px;resize:vertical}
+.st{display:flex;flex-wrap:wrap;gap:6px}
+.st button{padding:9px 12px;border-radius:99px;border:1px solid var(--l);font-size:13px;font-weight:700;color:var(--m)}
+.st button.on{background:var(--gg);color:#21180a;border-color:transparent}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border-radius:14px;font-weight:800;font-size:16px;background:var(--gg);color:#21180a;margin-top:12px;text-decoration:none}
+.btn.sec2{background:rgba(255,255,255,.07);color:var(--t);border:1px solid var(--l)}
+.btn.wa{background:#1faa59;color:#fff}
+.btn:disabled{opacity:.6}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ln{display:grid;grid-template-columns:1fr 54px 78px 30px;gap:6px;align-items:center;margin-bottom:6px}
+.ln input{padding:10px 8px;border-radius:10px;border:1px solid var(--l);background:rgba(8,10,28,.6);font-size:15px;width:100%;min-width:0}
+.ln .del{color:var(--bad);font-size:20px}
+.lnh{display:grid;grid-template-columns:1fr 54px 78px 30px;gap:6px;font-size:11px;color:var(--d);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.add{color:var(--g2);font-weight:700;font-size:14px;padding:6px 0}
+.totline{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--l);margin-top:10px;padding-top:10px}
+.totline b{font-family:Cinzel,serif;font-size:26px;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tog{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:700}
+.tog input{width:22px;height:22px;accent-color:#d6b25e}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#f6f1e4;color:#1d1d2b;padding:12px 18px;border-radius:12px;font-weight:700;z-index:90;opacity:0;transition:.25s;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.toast.err{background:#ffb3a6}
+.login{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse 120% 60% at 50% 20%,#262d6a,#0d1129 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.login[hidden]{display:none}
+.login img{width:120px;margin-bottom:14px;filter:drop-shadow(0 10px 40px rgba(214,178,94,.3))}
+.login h1{font-family:Cinzel,serif;font-size:26px;letter-spacing:.06em;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.login p{color:var(--m);margin:6px 0 20px;font-size:14px}
+.login form{width:100%;max-width:340px}
+.ib2{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);display:grid;place-items:center}
+.load{text-align:center;color:var(--d);padding:50px 0}
+.note{font-size:12px;color:var(--d);margin-top:8px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="brand">TOUTONCANAP<small>GESTION</small></div>
+  <button class="ib" id="refresh" aria-label="Actualiser"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f1d48a" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5"/></svg></button>
+  <button class="ib2" id="logout" aria-label="Se déconnecter"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b9b3c9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
+</div></header>
+
+<main class="wrap">
+  <div class="tabs">
+    <button class="tab on" data-v="dem">Demandes</button>
+    <button class="tab" data-v="fac">Factures</button>
+  </div>
+  <div id="view"><div class="load">Chargement…</div></div>
+</main>
+
+<button class="fab" id="fab">+ Demande</button>
+<div class="bg" id="bg"></div>
+<div class="sheet" id="sheet"><div class="grab"></div><div class="in" id="sin"></div></div>
+<div class="toast" id="toast"></div>
+<div class="login" id="login" hidden>
+  <img src="embleme.png" alt="">
+  <h1>TOUTONCANAP</h1>
+  <p>Espace de gestion</p>
+  <form id="lf">
+    <label class="lbl" for="lc">Code d'accès</label>
+    <input class="in-f" id="lc" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" required style="text-align:center;font-size:24px;letter-spacing:.4em">
+    <button class="btn" type="submit" id="lb">Entrer</button>
+    <p class="note" id="le" style="text-align:center"></p>
+  </form>
+</div>
+
+<script>
+const S={data:null,view:"dem",filtre:"actifs",q:""};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const eur=n=>(Number(n)||0).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
+const API="https://script.google.com/macros/s/AKfycbxf0tIctUsUbneAStitsEUd3nwyOLkk49t6uR5Yyv-rkzctuTs550EdwyC4iKCnMyKX/exec";
+const store={get:k=>{try{return localStorage.getItem(k)}catch(_){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}},del:k=>{try{localStorage.removeItem(k)}catch(_){}}};
+async function call(action,...args){
+  const res=await fetch(API,{method:"POST",body:JSON.stringify({action,args,code:store.get("tc_code")||""})});
+  const r=await res.json();
+  if(r.auth===false){ store.del("tc_code"); montrerLogin("Code incorrect ou modifié."); throw new Error("Code incorrect"); }
+  if(!r.ok) throw new Error(r.error||"Erreur");
+  return r.data;
+}
+function montrerLogin(msg){ $("#login").hidden=false; $("#le").textContent=msg||""; setTimeout(()=>$("#lc").focus(),100); }
+const cls=s=>"s-"+String(s||"").replace(/\s/g,"");
+function toast(m,err){const t=$("#toast");t.textContent=m;t.className="toast on"+(err?" err":"");clearTimeout(t._);t._=setTimeout(()=>t.className="toast",3200);}
+function intl(tel){let d=String(tel||"").replace(/\D/g,"");if(d.startsWith("0"))d="33"+d.slice(1);return d;}
+const IC={
+ tel:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>',
+ wa:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>',
+ map:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+ mail:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>'
+};
+
+/* ---------- chargement ---------- */
+async function charger(silencieux){
+  if(!silencieux) $("#view").innerHTML='<div class="load">Chargement…</div>';
+  try{ S.data=await call("getData"); rendre(); }
+  catch(e){ $("#view").innerHTML=`<div class="empty">Erreur : ${esc(e.message||e)}</div>`; }
+}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===b));S.view=b.dataset.v;rendre();});
+$("#refresh").onclick=()=>charger();
+$("#fab").onclick=nouvelleDemande;
+
+function rendre(){ if(!S.data) return; S.view==="dem"?vueDemandes():vueFactures(); }
+
+/* ---------- vue demandes ---------- */
+function vueDemandes(){
+  const D=S.data.demandes, F=S.data.factures;
+  const mois=new Date(), mm=String(mois.getMonth()+1).padStart(2,"0")+"/"+mois.getFullYear();
+  const ca=F.filter(f=>f.paiement==="Payée"&&String(f.payeeLe||f.date).slice(3)===mm).reduce((s,f)=>s+f.total,0);
+  const n=st=>D.filter(d=>d.statut===st).length;
+  const actifs=D.filter(d=>!["Payé","Annulé"].includes(d.statut));
+  let L = S.filtre==="actifs"?actifs : S.filtre==="tous"?D : D.filter(d=>d.statut===S.filtre);
+  const q=S.q.trim().toLowerCase();
+  if(q) L=L.filter(d=>(d.nom+" "+d.commune+" "+d.tel+" "+d.adresse).toLowerCase().includes(q));
+  const chips=[["actifs","En cours ("+actifs.length+")"],...S.data.statuts.map(s=>[s,s+" ("+n(s)+")"]),["tous","Tout"]];
+  $("#view").innerHTML=`
+    <div class="kpis">
+      <div class="kpi"><b>${n("Nouveau")}</b><span>Nouvelles</span></div>
+      <div class="kpi"><b>${n("Confirmé")}</b><span>Confirmées</span></div>
+      <div class="kpi"><b>${n("Réalisé")}</b><span>À facturer</span></div>
+      <div class="kpi"><b>${Math.round(ca)} €</b><span>Encaissé ce mois</span></div>
+    </div>
+    <input class="search" id="q" placeholder="Rechercher un nom, une commune…" value="${esc(S.q)}">
+    <div class="chips">${chips.map(([k,t])=>`<button class="chip ${S.filtre===k?"on":""}" data-f="${esc(k)}">${esc(t)}</button>`).join("")}</div>
+    <div class="list">${L.length?L.map(d=>`
+      <button class="card" data-id="${esc(d.id)}">
+        <div class="r1"><span class="nm">${esc(d.nom)}</span><span class="pill ${cls(d.statut)}">${esc(d.statut)}</span></div>
+        <div class="r2"><span>${esc(d.commune||"—")} · ${d.rdv?"RDV "+esc(fmtRdv(d.rdv)):esc(d.date||d.recue)}</span><b>${esc(d.total||"")}</b></div>
+      </button>`).join(""):'<div class="empty">Aucune demande ici.</div>'}</div>`;
+  $("#q").oninput=e=>{S.q=e.target.value;const p=e.target.selectionStart;vueDemandes();const i=$("#q");i.focus();i.setSelectionRange(p,p);};
+  document.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{S.filtre=b.dataset.f;vueDemandes();});
+  document.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>detail(b.dataset.id));
+}
+function fmtRdv(v){ if(!v) return ""; const d=new Date(v); return isNaN(d)?v:d.toLocaleDateString("fr-FR",{weekday:"short",day:"numeric",month:"short"})+" "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); }
+
+/* ---------- feuille ---------- */
+function ouvrir(html){ $("#sin").innerHTML=html; $("#sheet").classList.add("on"); $("#bg").classList.add("on"); $("#sheet").scrollTop=0; document.body.style.overflow="hidden"; }
+function fermer(){ $("#sheet").classList.remove("on"); $("#bg").classList.remove("on"); document.body.style.overflow=""; }
+$("#bg").onclick=fermer;
+
+/* ---------- détail d'une demande ---------- */
+function detail(id){
+  const d=S.data.demandes.find(x=>x.id===id); if(!d) return;
+  const adr=[d.adresse,d.commune].filter(Boolean).join(", ");
+  ouvrir(`
+    <div class="sh"><div style="flex:1"><h2>${esc(d.nom)}</h2><div class="sub">Reçue le ${esc(d.recue)} · ${esc(d.id)}</div></div><button class="x" onclick="fermer()">×</button></div>
+    <div class="acts">
+      <a class="act ${d.tel?"":"dis"}" href="tel:${esc(d.tel)}">${IC.tel}Appeler</a>
+      <a class="act ${d.tel?"":"dis"}" href="https://wa.me/${intl(d.tel)}" target="_blank">${IC.wa}WhatsApp</a>
+      <a class="act ${adr?"":"dis"}" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(adr)}" target="_blank">${IC.map}Itinéraire</a>
+      <a class="act ${d.email?"":"dis"}" href="mailto:${esc(d.email)}">${IC.mail}E-mail</a>
+    </div>
+    <div class="sec"><h3>Demande</h3>
+      <p>${esc(d.tel)}${d.email?" · "+esc(d.email):""}<br>${esc(adr)}<br>Souhaité : ${esc(d.date||"—")} ${d.moment?"("+esc(d.moment).toLowerCase()+")":""}</p>
+      ${d.lignes&&d.lignes.length?`<ul style="margin-top:8px">${d.lignes.map(l=>`<li><span>${esc(l.qte)} × ${esc(l.designation)}</span><b>${eur(l.qte*l.pu)}</b></li>`).join("")}</ul>`:""}
+      ${d.total?`<p style="margin-top:6px">Estimation : <b style="color:var(--g2)">${esc(d.total)}</b></p>`:""}
+      ${d.message?`<p style="margin-top:8px">« ${esc(d.message)} »</p>`:""}
+      ${d.photos?`<p style="margin-top:8px"><a href="${esc(d.photos)}" target="_blank">Voir les photos ↗</a></p>`:""}
+    </div>
+    <div class="sec"><h3>Suivi</h3>
+      <div class="st" id="st">${S.data.statuts.map(s=>`<button class="${s===d.statut?"on":""}" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
+      <label class="lbl" for="rdv">Rendez-vous</label><input class="in-f" id="rdv" type="datetime-local" value="${esc(d.rdv)}">
+      <label class="lbl" for="notes">Notes</label><textarea class="in-f" id="notes">${esc(d.notes)}</textarea>
+      <div class="two">
+        <div><label class="lbl" for="tel">Téléphone</label><input class="in-f" id="tel" value="${esc(d.tel)}"></div>
+        <div><label class="lbl" for="mail">E-mail</label><input class="in-f" id="mail" type="email" value="${esc(d.email)}"></div>
+      </div>
+      <button class="btn sec2" id="save">Enregistrer</button>
+    </div>
+    ${d.facture?`<button class="btn" id="vf">Voir la facture ${esc(d.facture)}</button>`:`<button class="btn" id="cf">Créer la facture</button>`}
+  `);
+  let statut=d.statut;
+  document.querySelectorAll("#st [data-s]").forEach(b=>b.onclick=()=>{statut=b.dataset.s;document.querySelectorAll("#st [data-s]").forEach(x=>x.classList.toggle("on",x===b));});
+  $("#save").onclick=async()=>{
+    const btn=$("#save");btn.disabled=true;btn.textContent="Enregistrement…";
+    const patch={statut,rdv:$("#rdv").value,notes:$("#notes").value,tel:$("#tel").value.trim(),email:$("#mail").value.trim()};
+    try{ await call("majDemande",d.id,patch); Object.assign(d,patch); toast("Enregistré ✓"); fermer(); rendre(); }
+    catch(e){ toast(e.message||"Erreur",1); btn.disabled=false; btn.textContent="Enregistrer"; }
+  };
+  if($("#cf")) $("#cf").onclick=()=>editeurFacture(d);
+  if($("#vf")) $("#vf").onclick=()=>actionsFacture(d.facture);
+}
+
+/* ---------- éditeur de facture ---------- */
+function editeurFacture(d){
+  d=d||{};
+  const today=new Date().toISOString().slice(0,10);
+  const prest=d.rdv?String(d.rdv).slice(0,10):today;
+  let lignes=(d.lignes&&d.lignes.length?d.lignes:[{designation:"Nettoyage — ",qte:1,pu:0}]).map(l=>({...l}));
+  ouvrir(`
+    <div class="sh"><div style="flex:1"><h2>Nouvelle facture</h2><div class="sub">Le numéro est attribué automatiquement</div></div><button class="x" onclick="fermer()">×</button></div>
+    <div class="sec"><h3>Client</h3>
+      <label class="lbl" for="fc">Nom</label><input class="in-f" id="fc" value="${esc(d.nom)}">
+      <label class="lbl" for="fa">Adresse</label><input class="in-f" id="fa" value="${esc([d.adresse,d.commune].filter(Boolean).join(", "))}">
+      <div class="two">
+        <div><label class="lbl" for="fm">E-mail</label><input class="in-f" id="fm" type="email" value="${esc(d.email)}"></div>
+        <div><label class="lbl" for="ft">Téléphone</label><input class="in-f" id="ft" value="${esc(d.tel)}"></div>
+      </div>
+      <label class="lbl" for="fd">Date de la prestation</label><input class="in-f" id="fd" type="date" value="${prest}">
+    </div>
+    <div class="sec"><h3>Prestations</h3>
+      <div class="lnh"><span>Désignation</span><span>Qté</span><span>Prix u.</span><span></span></div>
+      <div id="lns"></div>
+      <button class="add" id="addl">+ Ajouter une ligne</button>
+      <div class="totline"><span style="font-weight:800">Total</span><b id="tot">0 €</b></div>
+      <p class="note">TVA non applicable, article 293 B du CGI.</p>
+      <label class="tog"><input type="checkbox" id="fp"> Déjà payée</label>
+      <div id="modeW" style="display:none"><label class="lbl" for="fmode">Mode de paiement</label>
+        <select class="in-f" id="fmode"><option>espèces</option><option>carte bancaire</option><option>virement</option><option>chèque</option></select></div>
+    </div>
+    <button class="btn" id="gen">Créer la facture</button>
+    <p class="note" style="text-align:center">Une facture créée ne se modifie plus (obligation légale). En cas d'erreur, demandez-moi un avoir.</p>
+  `);
+  const draw=()=>{
+    $("#lns").innerHTML=lignes.map((l,i)=>`<div class="ln">
+      <input data-i="${i}" data-k="designation" value="${esc(l.designation)}" aria-label="Désignation">
+      <input data-i="${i}" data-k="qte" type="number" inputmode="decimal" step="1" value="${esc(l.qte)}" aria-label="Quantité">
+      <input data-i="${i}" data-k="pu" type="number" inputmode="decimal" step="0.01" value="${esc(l.pu)}" aria-label="Prix unitaire">
+      <button class="del" data-del="${i}" aria-label="Supprimer la ligne">×</button></div>`).join("");
+    tot();
+  };
+  const tot=()=>$("#tot").textContent=eur(lignes.reduce((s,l)=>s+(Number(l.qte)||0)*(Number(l.pu)||0),0));
+  $("#lns").addEventListener("input",e=>{const t=e.target;if(t.dataset.i==null)return;lignes[t.dataset.i][t.dataset.k]=t.value;tot();});
+  $("#lns").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b)return;lignes.splice(+b.dataset.del,1);draw();});
+  $("#addl").onclick=()=>{lignes.push({designation:"",qte:1,pu:0});draw();};
+  $("#fp").onchange=e=>$("#modeW").style.display=e.target.checked?"":"none";
+  draw();
+  $("#gen").onclick=async()=>{
+    const f={idDemande:d.id||"",client:$("#fc").value.trim(),adresse:$("#fa").value.trim(),email:$("#fm").value.trim(),tel:$("#ft").value.trim(),
+      datePrestation:$("#fd").value,lignes:lignes.map(l=>({designation:l.designation,qte:Number(l.qte),pu:Number(l.pu)})),payee:$("#fp").checked,mode:$("#fp").checked?$("#fmode").value:""};
+    const b=$("#gen");b.disabled=true;b.textContent="Création du PDF…";
+    try{ const r=await call("creerFacture",f); toast("Facture "+r.numero+" créée ✓"); await charger(true); actionsFacture(r.numero); }
+    catch(e){ toast(e.message||"Erreur",1); b.disabled=false; b.textContent="Créer la facture"; }
+  };
+}
+
+/* ---------- actions sur une facture ---------- */
+function actionsFacture(numero){
+  const f=S.data.factures.find(x=>x.numero===numero); if(!f){toast("Facture introuvable",1);return;}
+  ouvrir(`
+    <div class="sh"><div style="flex:1"><h2>Facture ${esc(f.numero)}</h2><div class="sub">${esc(f.client)} · ${esc(f.date)}</div></div><button class="x" onclick="fermer()">×</button></div>
+    <div class="sec"><ul>
+      <li><span>Montant</span><b>${eur(f.total)}</b></li>
+      <li><span>Paiement</span><b><span class="pill ${cls(f.paiement)}">${esc(f.paiement)}</span></b></li>
+      ${f.mode?`<li><span>Mode</span><b>${esc(f.mode)}</b></li>`:""}${f.payeeLe?`<li><span>Payée le</span><b>${esc(f.payeeLe)}</b></li>`:""}
+    </ul></div>
+    <button class="btn" id="open">Ouvrir le PDF</button>
+    <label class="lbl" for="em">E-mail du client</label><input class="in-f" id="em" type="email" value="${esc(f.email)}" placeholder="adresse@exemple.fr">
+    <button class="btn sec2" id="send">Envoyer par e-mail</button>
+    <button class="btn sec2" id="share">Partager par WhatsApp / SMS</button>
+    <div id="shareW"></div>
+    ${f.paiement!=="Payée"?`<div class="sec" style="margin-top:14px"><h3>Encaissement</h3>
+      <select class="in-f" id="pm"><option>espèces</option><option>carte bancaire</option><option>virement</option><option>chèque</option></select>
+      <button class="btn" id="paid" style="background:#3fbf7f;color:#06260f">Marquer comme payée</button></div>`:""}
+  `);
+  $("#open").onclick=async()=>{ const w=window.open("","_blank"); try{ const u=await call("urlFacture",f.numero); if(w) w.location.href=u; else location.href=u; }catch(e){ if(w) w.close(); toast(e.message,1); } };
+  $("#send").onclick=async()=>{
+    const em=$("#em").value.trim(); if(!/@/.test(em)){toast("Indiquez l'e-mail du client",1);return;}
+    const b=$("#send");b.disabled=true;b.textContent="Envoi…";
+    try{ await call("envoyerFacture",f.numero,em); f.email=em; toast("Facture envoyée à "+em+" ✓"); }
+    catch(e){ toast(e.message||"Erreur",1); }
+    b.disabled=false;b.textContent="Envoyer par e-mail";
+  };
+  $("#share").onclick=async()=>{
+    const b=$("#share");b.disabled=true;b.textContent="Création du lien…";
+    try{
+      const url=await call("partagerFacture",f.numero);
+      const msg=encodeURIComponent(`Bonjour, voici votre facture Toutoncanap n° ${f.numero} (${eur(f.total)}) : ${url}\nMerci pour votre confiance !`);
+      $("#shareW").innerHTML=`<a class="btn wa" href="https://wa.me/${intl(f.tel)}?text=${msg}" target="_blank">Envoyer sur WhatsApp</a>
+        <a class="btn sec2" href="sms:${esc(f.tel)}?&body=${msg}">Envoyer par SMS</a>
+        <p class="note" style="word-break:break-all">${esc(url)}</p>`;
+      b.style.display="none";
+    }catch(e){ toast(e.message||"Erreur",1); b.disabled=false; b.textContent="Partager par WhatsApp / SMS"; }
+  };
+  if($("#paid")) $("#paid").onclick=async()=>{
+    const b=$("#paid");b.disabled=true;
+    try{ await call("marquerPayee",f.numero,$("#pm").value); toast("Paiement enregistré ✓"); await charger(true); actionsFacture(f.numero); }
+    catch(e){ toast(e.message||"Erreur",1); b.disabled=false; }
+  };
+}
+
+/* ---------- vue factures ---------- */
+function vueFactures(){
+  const F=S.data.factures;
+  const du=F.filter(f=>f.paiement!=="Payée").reduce((s,f)=>s+f.total,0);
+  const an=new Date().getFullYear(), caAn=F.filter(f=>f.paiement==="Payée"&&String(f.payeeLe||f.date).endsWith(an)).reduce((s,f)=>s+f.total,0);
+  $("#view").innerHTML=`
+    <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><b>${F.length}</b><span>Factures</span></div>
+      <div class="kpi"><b>${Math.round(du)} €</b><span>À encaisser</span></div>
+      <div class="kpi"><b>${Math.round(caAn)} €</b><span>Encaissé ${an}</span></div>
+    </div>
+    <button class="btn sec2" id="nf" style="margin:0 0 12px">+ Facture sans demande</button>
+    <div class="list">${F.length?F.map(f=>`
+      <button class="card" data-n="${esc(f.numero)}">
+        <div class="r1"><span class="nm">${esc(f.numero)} · ${esc(f.client)}</span><span class="pill ${cls(f.paiement)}">${esc(f.paiement)}</span></div>
+        <div class="r2"><span>${esc(f.date)}</span><b>${eur(f.total)}</b></div>
+      </button>`).join(""):'<div class="empty">Aucune facture pour l\'instant.</div>'}</div>`;
+  $("#nf").onclick=()=>editeurFacture({});
+  document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>actionsFacture(b.dataset.n));
+}
+
+/* ---------- ajout manuel ---------- */
+function nouvelleDemande(){
+  ouvrir(`
+    <div class="sh"><div style="flex:1"><h2>Nouvelle demande</h2><div class="sub">Appel, Instagram, bouche-à-oreille…</div></div><button class="x" onclick="fermer()">×</button></div>
+    <label class="lbl" for="nn">Nom</label><input class="in-f" id="nn">
+    <div class="two">
+      <div><label class="lbl" for="nt">Téléphone</label><input class="in-f" id="nt" type="tel"></div>
+      <div><label class="lbl" for="ne">E-mail</label><input class="in-f" id="ne" type="email"></div>
+    </div>
+    <label class="lbl" for="na">Adresse</label><input class="in-f" id="na">
+    <label class="lbl" for="nc">Commune</label><input class="in-f" id="nc">
+    <label class="lbl" for="nm">Ce qu'il faut nettoyer</label><textarea class="in-f" id="nm"></textarea>
+    <button class="btn" id="nok">Ajouter</button>
+  `);
+  $("#nok").onclick=async()=>{
+    const o={nom:$("#nn").value.trim(),tel:$("#nt").value.trim(),email:$("#ne").value.trim(),adresse:$("#na").value.trim(),commune:$("#nc").value.trim(),message:$("#nm").value.trim()};
+    if(!o.nom){toast("Indiquez au moins un nom",1);return;}
+    const b=$("#nok");b.disabled=true;
+    try{ await call("ajoutDemande",o); toast("Demande ajoutée ✓"); fermer(); charger(true); }
+    catch(e){ toast(e.message||"Erreur",1); b.disabled=false; }
+  };
+}
+
+$("#logout").onclick=()=>{ store.del("tc_code"); S.data=null; $("#view").innerHTML=""; montrerLogin(); };
+$("#lf").onsubmit=async e=>{
+  e.preventDefault(); const b=$("#lb"); b.disabled=true; b.textContent="Vérification…"; $("#le").textContent="";
+  store.set("tc_code",$("#lc").value);
+  try{ await call("connexion"); $("#login").hidden=true; $("#lc").value=""; charger(); }
+  catch(err){ if($("#login").hidden===false) $("#le").textContent=err.message; }
+  b.disabled=false; b.textContent="Entrer";
+};
+if(store.get("tc_code")) charger(); else montrerLogin();
+</script>
+</body>
+</html>
