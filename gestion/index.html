@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Toutoncanap – Gestion</title>
-<meta name="theme-color" content="#0d1129">
+<meta name="theme-color" content="#0E1330">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -14,20 +14,20 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Toutoncanap">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--n:#0d1129;--n2:#161b3f;--n3:#20265a;--l:rgba(214,178,94,.22);--g:#d6b25e;--g2:#f1d48a;--gg:linear-gradient(135deg,#f6dc94,#d6b25e 45%,#a8812f);
-  --t:#f4ede0;--m:#b9b3c9;--d:#8a87a3;--w:#4aa3e8;--ok:#3fbf7f;--bad:#ff8a7a}
+:root{--n:#0E1330;--n2:#161b3f;--n3:#20265a;--l:rgba(214,178,94,.22);--g:#E3B04B;--g2:#f1d48a;--gg:linear-gradient(135deg,#f6dc94,#E3B04B 45%,#a8812f);
+  --t:#f4ede0;--m:#b9b3c9;--d:#8a87a3;--w:#3FC1E0;--ok:#3fbf7f;--bad:#ff8a7a}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Manrope,system-ui,sans-serif;background:var(--n);color:var(--t);min-height:100vh;padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+body{font-family:Outfit,system-ui,sans-serif;background:var(--n);color:var(--t);min-height:100vh;padding-bottom:calc(90px + env(safe-area-inset-bottom))}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none}
 a{color:var(--g2)}
 .wrap{max-width:720px;margin:0 auto;padding:0 14px}
 header{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top);background:rgba(13,17,41,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--l)}
 header .wrap{display:flex;align-items:center;gap:10px;height:56px}
-.brand{font-family:Cinzel,serif;font-weight:800;letter-spacing:.06em;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:17px}
-.brand small{display:block;font-family:Manrope;font-size:10px;letter-spacing:.2em;color:var(--d);-webkit-text-fill-color:var(--d)}
+.brand{font-family:Outfit,sans-serif;font-weight:800;letter-spacing:.06em;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:17px}
+.brand small{display:block;font-family:Outfit;font-size:10px;letter-spacing:.2em;color:var(--d);-webkit-text-fill-color:var(--d)}
 .ib{margin-left:auto;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);display:grid;place-items:center}
 .tabs{display:flex;gap:6px;padding:10px 0}
 .tab{flex:1;padding:11px;border-radius:12px;font-weight:800;font-size:15px;color:var(--m);background:rgba(255,255,255,.04);border:1px solid transparent}
@@ -95,16 +95,16 @@ textarea.in-f{min-height:70px;resize:vertical}
 .lnh{display:grid;grid-template-columns:1fr 54px 78px 30px;gap:6px;font-size:11px;color:var(--d);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
 .add{color:var(--g2);font-weight:700;font-size:14px;padding:6px 0}
 .totline{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--l);margin-top:10px;padding-top:10px}
-.totline b{font-family:Cinzel,serif;font-size:26px;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.totline b{font-family:Outfit,sans-serif;font-size:26px;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
 .tog{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:700}
-.tog input{width:22px;height:22px;accent-color:#d6b25e}
+.tog input{width:22px;height:22px;accent-color:#E3B04B}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#f6f1e4;color:#1d1d2b;padding:12px 18px;border-radius:12px;font-weight:700;z-index:90;opacity:0;transition:.25s;max-width:90vw;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%)}
 .toast.err{background:#ffb3a6}
-.login{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse 120% 60% at 50% 20%,#262d6a,#0d1129 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.login{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse 120% 60% at 50% 20%,#262d6a,#0E1330 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
 .login[hidden]{display:none}
 .login img{width:120px;margin-bottom:14px;filter:drop-shadow(0 10px 40px rgba(214,178,94,.3))}
-.login h1{font-family:Cinzel,serif;font-size:26px;letter-spacing:.06em;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
+.login h1{font-family:Outfit,sans-serif;font-size:26px;letter-spacing:.06em;background:var(--gg);-webkit-background-clip:text;background-clip:text;color:transparent}
 .login p{color:var(--m);margin:6px 0 20px;font-size:14px}
 .login form{width:100%;max-width:340px}
 .ib2{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);display:grid;place-items:center}
