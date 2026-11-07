@@ -126,8 +126,8 @@ h2{font-family:Outfit,sans-serif;font-size:clamp(24px,7vw,30px);text-align:cente
 .divider{height:1px;background:var(--line);margin:22px 0}
 
 .field{position:relative}
-.field input,.promo input,.form input,.form select,.form textarea{width:100%;padding:15px 16px;border-radius:14px;border:1px solid var(--line);background:rgba(8,10,28,.55);outline:none;transition:border-color .2s}
-.field input:focus,.promo input:focus,.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--gold)}
+.field input,.field textarea,.promo input,.form input,.form select,.form textarea{width:100%;padding:15px 16px;border-radius:14px;border:1px solid var(--line);background:rgba(8,10,28,.55);outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus,.promo input:focus,.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--gold)}
 .field input{padding-left:46px}
 .field .lens{position:absolute;left:16px;top:50%;transform:translateY(-50%);opacity:.6;pointer-events:none}
 .sugg{margin-top:8px;border-radius:14px;overflow:hidden;border:1px solid var(--line);display:none}
@@ -288,6 +288,21 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
 .amu::before,.amu::after{content:"";height:1px;width:48px;background:linear-gradient(90deg,transparent,var(--line))}
 .amu::after{background:linear-gradient(90deg,var(--line),transparent)}
 .amu svg{filter:drop-shadow(0 0 8px rgba(227,176,75,.25))}
+.cpage .wrap{max-width:560px}
+.cintro{text-align:center;color:var(--muted);font-size:15px;line-height:1.55;margin:0 auto 22px}
+.cintro a,.calt a{color:var(--gold2)}
+.calt{text-align:center;color:var(--muted);font-size:14px;margin-top:18px}
+.fcontact{display:inline-block;margin:4px 0 6px;padding:12px 26px;border-radius:999px;border:1px solid var(--gold);color:var(--gold2)!important;font-weight:700;text-decoration:none}
+.fcontact:hover{background:rgba(227,176,75,.08)}
+.cform{display:grid;gap:14px;max-width:560px;margin:0 auto}
+.cform textarea{resize:vertical;min-height:130px;width:100%;box-sizing:border-box;display:block;font:inherit}
+.cform .field label{display:block;margin-bottom:6px}
+.cform .field input{padding-left:16px}
+.cform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cform .cta{width:100%}
+.cnote{font-size:13px;color:var(--muted);margin:0}
+.cmsg{margin:0;font-size:15px;text-align:center;min-height:1em}
+.cmsg.ok{color:var(--water2)} .cmsg.ko{color:#ff8f8f}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
@@ -296,7 +311,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
   .hero{padding-top:50px}
 }
 </style>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": "https://toutoncanap.fr/#entreprise", "name": "Toutoncanap", "alternateName": "Tout ton canap", "slogan": "Rituel de pureté pour vos tissus", "description": "Nettoyage de canapés, fauteuils, matelas, tapis et sièges auto en tissu à domicile, par injection-extraction. Devis gratuit et immédiat en ligne.", "url": "https://toutoncanap.fr/", "telephone": "+33648713747", "email": "contact@toutoncanap.fr", "address": {"@type": "PostalAddress", "addressLocality": "Nailloux", "postalCode": "31560", "addressRegion": "Occitanie", "addressCountry": "FR"}, "areaServed": [{"@type": "City", "name": "Nailloux"}, {"@type": "City", "name": "Villefranche-de-Lauragais"}, {"@type": "City", "name": "Ayguesvives"}, {"@type": "City", "name": "Baziège"}, {"@type": "City", "name": "Montgiscard"}, {"@type": "City", "name": "Auterive"}, {"@type": "City", "name": "Cintegabelle"}, {"@type": "City", "name": "Escalquens"}, {"@type": "City", "name": "Castanet-Tolosan"}, {"@type": "City", "name": "Labège"}, {"@type": "City", "name": "Saint-Orens-de-Gameville"}, {"@type": "City", "name": "Ramonville-Saint-Agne"}, {"@type": "City", "name": "Toulouse"}, {"@type": "City", "name": "Balma"}, {"@type": "City", "name": "Muret"}, {"@type": "City", "name": "Revel"}, {"@type": "City", "name": "Castelnaudary"}, {"@type": "AdministrativeArea", "name": "Lauragais"}], "priceRange": "10 € – 139 €", "currenciesAccepted": "EUR", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Nettoyage à domicile", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé 2 places"}, "price": "69", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé 3 places"}, "price": "79", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé 4–5 places"}, "price": "99", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé d'angle"}, "price": "109", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé panoramique / XXL"}, "price": "139", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fauteuil"}, "price": "39", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pouf / repose-pieds"}, "price": "15", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Chaise en tissu"}, "price": "10", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Coussins déco (lot de 4)"}, "price": "15", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas bébé / enfant"}, "price": "35", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas 1 personne"}, "price": "49", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas 2 personnes"}, "price": "69", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas King / Queen"}, "price": "79", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Petit tapis (moins de 2 m²)"}, "price": "35", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tapis moyen (2 à 4 m²)"}, "price": "49", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Grand tapis (plus de 4 m²)"}, "price": "69", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sièges avant (tissu)"}, "price": "45", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tous les sièges (5 places)"}, "price": "69", "priceCurrency": "EUR"}]}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qui nettoie les canapés à domicile dans le Lauragais et autour de Toulouse ?", "acceptedAnswer": {"@type": "Answer", "text": "Toutoncanap, une entreprise basée à Nailloux (31560), nettoie canapés, fauteuils, matelas, tapis et sièges auto directement chez vous, dans le Lauragais, à Toulouse et dans leurs alentours."}}, {"@type": "Question", "name": "Combien coûte le nettoyage d'un canapé à domicile ?", "acceptedAnswer": {"@type": "Answer", "text": "Chez Toutoncanap, comptez 69 € pour un canapé 2 places, 79 € pour un 3 places, 99 € pour un 4–5 places, 109 € pour un canapé d'angle et 139 € pour un canapé panoramique. Le prix est affiché tout de suite sur le site, sans inscription."}}, {"@type": "Question", "name": "Combien coûte le nettoyage d'un matelas à domicile ?", "acceptedAnswer": {"@type": "Answer", "text": "35 € pour un matelas bébé ou enfant, 49 € pour un matelas 1 personne, 69 € pour un 2 personnes et 79 € pour un King ou Queen."}}, {"@type": "Question", "name": "Quelle méthode utilise Toutoncanap ?", "acceptedAnswer": {"@type": "Answer", "text": "L'injection-extraction : après aspiration et pré-traitement des taches, l'eau et le produit sont injectés au cœur du tissu puis aspirés aussitôt avec la saleté. Le séchage prend en général quelques heures."}}, {"@type": "Question", "name": "Y a-t-il des frais de déplacement ?", "acceptedAnswer": {"@type": "Answer", "text": "Le déplacement est offert jusqu'à 15 km de Nailloux, puis de 2 € à 6 € jusqu'à 55 km. Commande minimum 49 €, et −10 % dès 150 € de prestations."}}, {"@type": "Question", "name": "Comment réserver un nettoyage de canapé ?", "acceptedAnswer": {"@type": "Answer", "text": "Sur toutoncanap.fr : on choisit ses meubles, on indique sa commune, et le prix s'affiche en 30 secondes. On envoie la demande en un clic, puis le jour et l'heure sont confirmés par message. Aussi par téléphone au 06 48 71 37 47."}}, {"@type": "Question", "name": "Combien de temps pour que ça sèche ?", "acceptedAnswer": {"@type": "Answer", "text": "En général quelques heures (souvent 4 à 6 h), selon le tissu, l'épaisseur et l'aération de la pièce. On extrait un maximum d'eau pour que le séchage soit rapide."}}, {"@type": "Question", "name": "Combien de temps dure l'intervention ?", "acceptedAnswer": {"@type": "Answer", "text": "Comptez environ 45 minutes à 1 h 30 pour un canapé, selon sa taille et son état."}}, {"@type": "Question", "name": "Est-ce que toutes les taches partent ?", "acceptedAnswer": {"@type": "Answer", "text": "La grande majorité, oui. Certaines taches très anciennes ou ayant décoloré la fibre (javel, encre, brûlure) peuvent laisser une trace. On vous le dit honnêtement avant de commencer."}}, {"@type": "Question", "name": "Vous nettoyez le cuir ?", "acceptedAnswer": {"@type": "Answer", "text": "Non, nous sommes spécialistes des tissus : canapés, fauteuils, matelas, tapis, sièges auto en tissu, microfibre, velours…"}}, {"@type": "Question", "name": "Les produits sont-ils sans danger ?", "acceptedAnswer": {"@type": "Answer", "text": "Nous utilisons des produits adaptés aux textiles d'ameublement, bien rincés lors de l'extraction. Les enfants et animaux peuvent retrouver le canapé une fois sec."}}, {"@type": "Question", "name": "J'ai besoin d'être présent ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, au moins au début et à la fin, pour voir ensemble le canapé et valider le résultat. Il nous faut juste une prise électrique et un point d'eau."}}, {"@type": "Question", "name": "Comment je paie ?", "acceptedAnswer": {"@type": "Answer", "text": "Sur place, une fois le travail terminé et validé avec vous."}}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": "https://toutoncanap.fr/#entreprise", "name": "Toutoncanap", "alternateName": "Tout ton canap", "slogan": "Rituel de pureté pour vos tissus", "description": "Nettoyage de canapés, fauteuils, matelas, tapis et sièges auto en tissu à domicile, par injection-extraction. Devis gratuit et immédiat en ligne.", "url": "https://toutoncanap.fr/", "telephone": "+33648713747", "address": {"@type": "PostalAddress", "addressLocality": "Nailloux", "postalCode": "31560", "addressRegion": "Occitanie", "addressCountry": "FR"}, "areaServed": [{"@type": "City", "name": "Nailloux"}, {"@type": "City", "name": "Villefranche-de-Lauragais"}, {"@type": "City", "name": "Ayguesvives"}, {"@type": "City", "name": "Baziège"}, {"@type": "City", "name": "Montgiscard"}, {"@type": "City", "name": "Auterive"}, {"@type": "City", "name": "Cintegabelle"}, {"@type": "City", "name": "Escalquens"}, {"@type": "City", "name": "Castanet-Tolosan"}, {"@type": "City", "name": "Labège"}, {"@type": "City", "name": "Saint-Orens-de-Gameville"}, {"@type": "City", "name": "Ramonville-Saint-Agne"}, {"@type": "City", "name": "Toulouse"}, {"@type": "City", "name": "Balma"}, {"@type": "City", "name": "Muret"}, {"@type": "City", "name": "Revel"}, {"@type": "City", "name": "Castelnaudary"}, {"@type": "AdministrativeArea", "name": "Lauragais"}], "priceRange": "10 € – 139 €", "currenciesAccepted": "EUR", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Nettoyage à domicile", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé 2 places"}, "price": "69", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé 3 places"}, "price": "79", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé 4–5 places"}, "price": "99", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé d'angle"}, "price": "109", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Canapé panoramique / XXL"}, "price": "139", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fauteuil"}, "price": "39", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pouf / repose-pieds"}, "price": "15", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Chaise en tissu"}, "price": "10", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Coussins déco (lot de 4)"}, "price": "15", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas bébé / enfant"}, "price": "35", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas 1 personne"}, "price": "49", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas 2 personnes"}, "price": "69", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Matelas King / Queen"}, "price": "79", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Petit tapis (moins de 2 m²)"}, "price": "35", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tapis moyen (2 à 4 m²)"}, "price": "49", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Grand tapis (plus de 4 m²)"}, "price": "69", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sièges avant (tissu)"}, "price": "45", "priceCurrency": "EUR"}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tous les sièges (5 places)"}, "price": "69", "priceCurrency": "EUR"}]}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qui nettoie les canapés à domicile dans le Lauragais et autour de Toulouse ?", "acceptedAnswer": {"@type": "Answer", "text": "Toutoncanap, une entreprise basée à Nailloux (31560), nettoie canapés, fauteuils, matelas, tapis et sièges auto directement chez vous, dans le Lauragais, à Toulouse et dans leurs alentours."}}, {"@type": "Question", "name": "Combien coûte le nettoyage d'un canapé à domicile ?", "acceptedAnswer": {"@type": "Answer", "text": "Chez Toutoncanap, comptez 69 € pour un canapé 2 places, 79 € pour un 3 places, 99 € pour un 4–5 places, 109 € pour un canapé d'angle et 139 € pour un canapé panoramique. Le prix est affiché tout de suite sur le site, sans inscription."}}, {"@type": "Question", "name": "Combien coûte le nettoyage d'un matelas à domicile ?", "acceptedAnswer": {"@type": "Answer", "text": "35 € pour un matelas bébé ou enfant, 49 € pour un matelas 1 personne, 69 € pour un 2 personnes et 79 € pour un King ou Queen."}}, {"@type": "Question", "name": "Quelle méthode utilise Toutoncanap ?", "acceptedAnswer": {"@type": "Answer", "text": "L'injection-extraction : après aspiration et pré-traitement des taches, l'eau et le produit sont injectés au cœur du tissu puis aspirés aussitôt avec la saleté. Le séchage prend en général quelques heures."}}, {"@type": "Question", "name": "Y a-t-il des frais de déplacement ?", "acceptedAnswer": {"@type": "Answer", "text": "Le déplacement est offert jusqu'à 15 km de Nailloux, puis de 2 € à 6 € jusqu'à 55 km. Commande minimum 49 €, et −10 % dès 150 € de prestations."}}, {"@type": "Question", "name": "Comment réserver un nettoyage de canapé ?", "acceptedAnswer": {"@type": "Answer", "text": "Sur toutoncanap.fr : on choisit ses meubles, on indique sa commune, et le prix s'affiche en 30 secondes. On envoie la demande en un clic, puis le jour et l'heure sont confirmés par message. Aussi par téléphone au 06 48 71 37 47."}}, {"@type": "Question", "name": "Combien de temps pour que ça sèche ?", "acceptedAnswer": {"@type": "Answer", "text": "En général quelques heures (souvent 4 à 6 h), selon le tissu, l'épaisseur et l'aération de la pièce. On extrait un maximum d'eau pour que le séchage soit rapide."}}, {"@type": "Question", "name": "Combien de temps dure l'intervention ?", "acceptedAnswer": {"@type": "Answer", "text": "Comptez environ 45 minutes à 1 h 30 pour un canapé, selon sa taille et son état."}}, {"@type": "Question", "name": "Est-ce que toutes les taches partent ?", "acceptedAnswer": {"@type": "Answer", "text": "La grande majorité, oui. Certaines taches très anciennes ou ayant décoloré la fibre (javel, encre, brûlure) peuvent laisser une trace. On vous le dit honnêtement avant de commencer."}}, {"@type": "Question", "name": "Vous nettoyez le cuir ?", "acceptedAnswer": {"@type": "Answer", "text": "Non, nous sommes spécialistes des tissus : canapés, fauteuils, matelas, tapis, sièges auto en tissu, microfibre, velours…"}}, {"@type": "Question", "name": "Les produits sont-ils sans danger ?", "acceptedAnswer": {"@type": "Answer", "text": "Nous utilisons des produits adaptés aux textiles d'ameublement, bien rincés lors de l'extraction. Les enfants et animaux peuvent retrouver le canapé une fois sec."}}, {"@type": "Question", "name": "J'ai besoin d'être présent ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, au moins au début et à la fin, pour voir ensemble le canapé et valider le résultat. Il nous faut juste une prise électrique et un point d'eau."}}, {"@type": "Question", "name": "Comment je paie ?", "acceptedAnswer": {"@type": "Answer", "text": "Sur place, une fois le travail terminé et validé avec vous."}}]}]</script>
 </head>
 <body>
 
@@ -442,7 +457,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
     <div class="kicker">En bref</div>
     <h2 id="en-bref-t">Toutoncanap, l'essentiel</h2>
     <p class="aeo-lead"><b>Toutoncanap</b> est un service de nettoyage de canapés et de tissus d'ameublement à domicile, basé à Nailloux, qui intervient dans le Lauragais, à Toulouse et alentours. Le prix s'affiche en 30 secondes sur le site, déplacement compris.</p>
-    <dl class="aeo-facts"><div><dt>Activité</dt><dd>Nettoyage de canapés, fauteuils, matelas, tapis et sièges auto en tissu, à domicile</dd></div><div><dt>Méthode</dt><dd>Injection-extraction, produits adaptés aux tissus d&#x27;ameublement</dd></div><div><dt>Basé à</dt><dd>Nailloux (31560), Haute-Garonne</dd></div><div><dt>Zone</dt><dd>Lauragais, Toulouse et alentours, jusqu&#x27;à 55 km : Villefranche-de-Lauragais, Ayguesvives, Baziège, Montgiscard, Auterive, Cintegabelle, Escalquens, Castanet-Tolosan, Labège, Saint-Orens, Ramonville, Toulouse, Balma, Muret, Revel, Castelnaudary…</dd></div><div><dt>Prix</dt><dd>Canapé dès 69 €, fauteuil 39 €, matelas dès 35 €, tapis dès 35 €. Devis gratuit et immédiat en ligne</dd></div><div><dt>Paiement</dt><dd>Sur place, une fois le travail terminé et validé</dd></div><div><dt>Contact</dt><dd>06 48 71 37 47 · contact@toutoncanap.fr</dd></div></dl>
+    <dl class="aeo-facts"><div><dt>Activité</dt><dd>Nettoyage de canapés, fauteuils, matelas, tapis et sièges auto en tissu, à domicile</dd></div><div><dt>Méthode</dt><dd>Injection-extraction, produits adaptés aux tissus d&#x27;ameublement</dd></div><div><dt>Basé à</dt><dd>Nailloux (31560), Haute-Garonne</dd></div><div><dt>Zone</dt><dd>Lauragais, Toulouse et alentours, jusqu&#x27;à 55 km : Villefranche-de-Lauragais, Ayguesvives, Baziège, Montgiscard, Auterive, Cintegabelle, Escalquens, Castanet-Tolosan, Labège, Saint-Orens, Ramonville, Toulouse, Balma, Muret, Revel, Castelnaudary…</dd></div><div><dt>Prix</dt><dd>Canapé dès 69 €, fauteuil 39 €, matelas dès 35 €, tapis dès 35 €. Devis gratuit et immédiat en ligne</dd></div><div><dt>Paiement</dt><dd>Sur place, une fois le travail terminé et validé</dd></div><div><dt>Contact</dt><dd>06 48 71 37 47 · formulaire de contact du site</dd></div></dl>
     <div class="aeo-qa"><div class="qa"><h3>Qui nettoie les canapés à domicile dans le Lauragais et autour de Toulouse ?</h3><p>Toutoncanap, une entreprise basée à Nailloux (31560), nettoie canapés, fauteuils, matelas, tapis et sièges auto directement chez vous, dans le Lauragais, à Toulouse et dans leurs alentours.</p></div><div class="qa"><h3>Combien coûte le nettoyage d&#x27;un canapé à domicile ?</h3><p>Chez Toutoncanap, comptez 69 € pour un canapé 2 places, 79 € pour un 3 places, 99 € pour un 4–5 places, 109 € pour un canapé d&#x27;angle et 139 € pour un canapé panoramique. Le prix est affiché tout de suite sur le site, sans inscription.</p></div><div class="qa"><h3>Combien coûte le nettoyage d&#x27;un matelas à domicile ?</h3><p>35 € pour un matelas bébé ou enfant, 49 € pour un matelas 1 personne, 69 € pour un 2 personnes et 79 € pour un King ou Queen.</p></div><div class="qa"><h3>Quelle méthode utilise Toutoncanap ?</h3><p>L&#x27;injection-extraction : après aspiration et pré-traitement des taches, l&#x27;eau et le produit sont injectés au cœur du tissu puis aspirés aussitôt avec la saleté. Le séchage prend en général quelques heures.</p></div><div class="qa"><h3>Y a-t-il des frais de déplacement ?</h3><p>Le déplacement est offert jusqu&#x27;à 15 km de Nailloux, puis de 2 € à 6 € jusqu&#x27;à 55 km. Commande minimum 49 €, et −10 % dès 150 € de prestations.</p></div><div class="qa"><h3>Comment réserver un nettoyage de canapé ?</h3><p>Sur toutoncanap.fr : on choisit ses meubles, on indique sa commune, et le prix s&#x27;affiche en 30 secondes. On envoie la demande en un clic, puis le jour et l&#x27;heure sont confirmés par message. Aussi par téléphone au 06 48 71 37 47.</p></div></div>
   </div>
 </section>
@@ -451,13 +466,33 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
 <footer>
   <div class="wrap">
     <div class="fseal"><svg aria-hidden="true" focusable="false" viewBox="0 0 120 120" width="110" height="110"><circle cx="60" cy="60" r="54" fill="none" stroke="#E3B04B" stroke-width="3.5"></circle><circle cx="60" cy="60" r="47" fill="none" stroke="#E3B04B" stroke-width="1.4" stroke-dasharray="1.5 4.5" stroke-linecap="round"></circle><g transform="translate(60 60) scale(.9) translate(-60 -57)"><rect x="34.1" y="61.0" width="51.7" height="15.2" rx="4.6" fill="#E3B04B" ></rect><rect x="28.0" y="69.4" width="11.4" height="18.2" rx="5.7" fill="#E3B04B" stroke="#0E1330" stroke-width="1.52"></rect><rect x="80.4" y="69.4" width="11.4" height="18.2" rx="5.7" fill="#E3B04B" stroke="#0E1330" stroke-width="1.52"></rect><rect x="36.4" y="75.4" width="47.1" height="12.2" rx="3.0" fill="#E3B04B" stroke="#0E1330" stroke-width="1.9"></rect><path d="M59.9 76.2 V86.1" stroke="#0E1330" stroke-width="1.52"></path><rect x="31.8" y="86.1" width="3.8" height="5.3" rx="1.5" fill="#E3B04B" ></rect><rect x="84.2" y="86.1" width="3.8" height="5.3" rx="1.5" fill="#E3B04B" ></rect><path d="M60 14 Q53.5 14 50 22 L34.1 64 V68.6 H85.9 V64 L70 22 Q66.5 14 60 14 Z" fill="#E3B04B"></path><path d="M48.8 30 H51 M69 30 H71.2" stroke="#3FC1E0" stroke-width="1.7" stroke-linecap="round"></path><path d="M46.5 36 H51 M69 36 H73.5" stroke="#3FC1E0" stroke-width="1.7" stroke-linecap="round"></path><path d="M44.2 42 H51.5 M68.5 42 H75.8" stroke="#3FC1E0" stroke-width="1.7" stroke-linecap="round"></path><path d="M42.0 48 H55 M65 48 H78.0" stroke="#3FC1E0" stroke-width="1.7" stroke-linecap="round"></path><path d="M39.7 54 H57.4 M62.6 54 H80.3" stroke="#3FC1E0" stroke-width="1.7" stroke-linecap="round"></path><path d="M37.4 60 H57.4 M62.6 60 H82.6" stroke="#3FC1E0" stroke-width="1.7" stroke-linecap="round"></path><path d="M53.5 19.5 Q60 14.8 66.5 19.5" fill="none" stroke="#3FC1E0" stroke-width="1.7" stroke-linecap="round"></path><path d="M52 27 Q60 24.5 68 27 L67.5 38 Q66.5 46.5 60 48.5 Q53.5 46.5 52.5 38 Z" fill="#E3B04B" stroke="#0E1330" stroke-width="1.8" stroke-linejoin="round"></path><path d="M54.2 31.8 Q56.7 30.2 58.9 31.6 M61.1 31.6 Q63.3 30.2 65.8 31.8" fill="none" stroke="#0E1330" stroke-width="1.3" stroke-linecap="round"></path><path d="M54.3 34.4 Q56.6 33 58.8 34.4 Q56.6 35.7 54.3 34.4Z M61.2 34.4 Q63.4 33 65.7 34.4 Q63.4 35.7 61.2 34.4Z" fill="#0E1330"></path><path d="M60 35 V40 M58 43 Q60 44 62 43" fill="none" stroke="#0E1330" stroke-width="1.2" stroke-linecap="round"></path><path d="M60 26.5 V21.5 Q60 19.5 61.8 20.2" fill="none" stroke="#0E1330" stroke-width="1.4" stroke-linecap="round"></path><rect x="58" y="48" width="4" height="9" rx="1.5" fill="#3FC1E0" stroke="#0E1330" stroke-width="1.1"></rect><path d="M29 31.5 Q29.99 35.01 33.5 36 Q29.99 36.99 29 40.5 Q28.01 36.99 24.5 36 Q28.01 35.01 29 31.5Z" fill="#3FC1E0"></path><path d="M91 31.5 Q91.99 35.01 95.5 36 Q91.99 36.99 91 40.5 Q90.01 36.99 86.5 36 Q90.01 35.01 91 31.5Z" fill="#3FC1E0"></path></g></svg></div><div class="fword goldtxt">TOUTONCANAP</div><div class="ftag">Rituel de pureté pour vos tissus</div>
-    <p><a href="tel:+33648713747">06 48 71 37 47</a> · <a href="mailto:contact@toutoncanap.fr">contact@toutoncanap.fr</a></p>
+    <p><a href="tel:+33648713747">06 48 71 37 47</a></p>
     <p>Nailloux (31560) · Lauragais, Toulouse et alentours</p>
-    <p class="flinks"><a href="#mentions-legales">Mentions légales</a> · <a href="#confidentialite">Confidentialité</a></p>
+    <p class="flinks"><a href="#contact">Contact</a> · <a href="#mentions-legales">Mentions légales</a> · <a href="#confidentialite">Confidentialité</a></p>
     <p style="margin-top:10px">© <span id="yr"></span> Toutoncanap</p>
   </div>
 </footer>
 
+
+<!-- CONTACT (fenêtre) -->
+<div class="legal cpage" id="contactov" hidden role="dialog" aria-modal="true" aria-labelledby="contact-t">
+  <div class="wrap">
+    <a class="back" href="#accueil">← Retour au site</a>
+    <div class="amu" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 17C11 17 10 11 10 9a6 6 0 0 1 12 0c0 2-1 8-6 8Z M8 19H24 M16 17V31" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 class="lh" id="contact-t" style="text-align:center">Contactez-nous</h2>
+    <p class="cintro">Une question sur un tissu, une tache, un créneau ? Écrivez-nous, on vous répond vite.<br>Pour connaître votre prix, le <a href="#devis">simulateur</a> répond en 30&nbsp;s.</p>
+    <form id="contactForm" class="cform" novalidate>
+      <div class="field"><label for="c-nom">Prénom et nom</label><input id="c-nom" name="nom" autocomplete="name" required maxlength="120"></div>
+      <div class="field"><label for="c-tel">Téléphone ou e-mail</label><input id="c-tel" name="contact" autocomplete="email" required maxlength="120" placeholder="06… ou vous@exemple.fr"></div>
+      <div class="field"><label for="c-msg">Votre message</label><textarea id="c-msg" name="message" rows="5" required maxlength="2000"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="c-web">Ne pas remplir</label><input id="c-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <p class="cnote">Vos coordonnées servent uniquement à vous répondre (voir <a href="#confidentialite">confidentialité</a>).</p>
+      <button class="cta" type="submit" id="c-send">Envoyer mon message</button>
+      <p class="cmsg" id="c-msgbox" role="status" aria-live="polite"></p>
+    </form>
+    <p class="calt">Ou appelez le <a href="tel:+33648713747">06 48 71 37 47</a> · <a href="mailto:toutoncanap@gmail.com">toutoncanap@gmail.com</a></p>
+  </div>
+</div>
 <!-- PAGES LÉGALES -->
 <div class="legal" id="legal" hidden>
   <div class="wrap">
@@ -471,7 +506,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
       <p><b>Johann Assalit</b>, entrepreneur individuel (EI) — A&amp;J Company, exerçant sous le nom commercial <b>Toutoncanap</b><br>
       Adresse : 8 avenue Robert Estrade, 31560 Nailloux<br>
       Téléphone : 06 48 71 37 47<br>
-      E-mail : contact@toutoncanap.fr<br>
+      E-mail : toutoncanap@gmail.com<br>
       SIRET : 521 807 669 00044 — immatriculé au Registre national des entreprises (RNE)<br>
       TVA non applicable, article 293 B du CGI.</p>
       <p>Directeur de la publication : Johann Assalit.</p>
@@ -499,7 +534,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
       <h2 class="lh">Politique de confidentialité</h2>
 
       <h3>Responsable du traitement</h3>
-      <p>Johann Assalit (EI) — Toutoncanap. Contact : contact@toutoncanap.fr.</p>
+      <p>Johann Assalit (EI) — Toutoncanap. Contact : toutoncanap@gmail.com.</p>
 
       <h3>Ce que fait le simulateur de prix</h3>
       <p>Le calcul du devis se fait entièrement dans votre navigateur : rien n'est enregistré ni envoyé tant que vous n'envoyez pas vous-même votre demande.</p>
@@ -523,7 +558,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
       <p>Toutoncanap ne dépose aucun cookie publicitaire ni outil de mesure d'audience. Les polices de caractères sont intégrées au site : aucune connexion n'est faite à des services de polices externes.</p>
 
       <h3>Vos droits</h3>
-      <p>Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données. Pour les exercer, écrivez à contact@toutoncanap.fr : nous répondons sous un mois. Vous pouvez aussi adresser une réclamation à la CNIL (www.cnil.fr).</p>
+      <p>Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données. Pour les exercer, écrivez-nous via le <a href="#contact">formulaire de contact</a> ou à toutoncanap@gmail.com : nous répondons sous un mois. Vous pouvez aussi adresser une réclamation à la CNIL (www.cnil.fr).</p>
 
       <p class="upd">Dernière mise à jour : novembre 2026.</p>
     </article>
@@ -550,7 +585,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
 
 <script>
 /* ====== RÉGLAGES (modifiables facilement) ====== */
-const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbxf0tIctUsUbneAStitsEUd3nwyOLkk49t6uR5Yyv-rkzctuTs550EdwyC4iKCnMyKX/exec";   // URL du script Google (Apps Script) qui reçoit les demandes
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycby_EdAaG4NOxrciGVTG5pfywQQmHmLIVwbCGLNFX6XF95-nyAIP1Disv3-fNoMwXX-X/exec";   // URL du script Google (Apps Script) qui reçoit les demandes
 const PHONE_DISPLAY = "06 48 71 37 47";
 const PHONE_INTL = "33648713747";
 const MIN_ORDER = 49;          // minimum de prestation (hors déplacement)
@@ -853,11 +888,10 @@ function showSend(fallback){
     <div class="btns">
       <a class="btn2 wa" href="https://wa.me/${PHONE_INTL}?text=${enc}" target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
       <a class="btn2" href="sms:+${PHONE_INTL}?&body=${enc}">Envoyer par SMS</a>
-      <a class="btn2" href="mailto:contact@toutoncanap.fr?subject=${encodeURIComponent("Demande de réservation")}&body=${enc}">Envoyer par e-mail</a>
       <button class="btn2" type="button" id="copyBtn">Copier ma demande</button>
       <button class="btn2" type="button" id="backBtn" style="border:0;background:none;color:var(--muted);font-weight:600">← Modifier mes infos</button>
     </div>
-    <p class="phone-txt">Ou appelez-nous directement<br><b>${PHONE_DISPLAY}</b><br>contact@toutoncanap.fr</p></div>`);
+    <p class="phone-txt">Ou appelez-nous directement<br><b>${PHONE_DISPLAY}</b></p></div>`);
   $("#copyBtn").onclick=async()=>{ try{ await navigator.clipboard.writeText(txt); $("#copyBtn").textContent="✓ Demande copiée"; }catch(_){ $("#copyBtn").textContent="Copie impossible, envoyez par SMS"; } };
   $("#backBtn").onclick=openBooking;
 }
@@ -883,11 +917,16 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeSheet(); });
   let lastY=0;
   function route(){
     const h=location.hash.slice(1);
-    if(h==="mentions-legales"||h==="confidentialite"){
-      if(legal.hidden){ lastY=window.scrollY; legal.hidden=false; document.body.style.overflow="hidden"; $("#bar").classList.remove("show"); }
-      const el=document.getElementById(h); legal.scrollTop=el.offsetTop-10;
-    } else if(!legal.hidden){
-      legal.hidden=true; document.body.style.overflow=""; updateBar();
+    const cov=document.getElementById("contactov");
+    const openLeg=(h==="mentions-legales"||h==="confidentialite"), openC=(h==="contact");
+    const wasOpen=!legal.hidden||!cov.hidden;
+    if(openLeg||openC){
+      if(!wasOpen){ lastY=window.scrollY; document.body.style.overflow="hidden"; $("#bar").classList.remove("show"); }
+      legal.hidden=!openLeg; cov.hidden=!openC;
+      if(openLeg){ const el=document.getElementById(h); legal.scrollTop=el.offsetTop-10; }
+      else { cov.scrollTop=0; setTimeout(()=>{ const i=document.getElementById("c-nom"); if(i&&matchMedia("(min-width:700px)").matches) i.focus(); },50); }
+    } else if(wasOpen){
+      legal.hidden=true; cov.hidden=true; document.body.style.overflow=""; updateBar();
       window.scrollTo(0,lastY);
     }
   }
@@ -901,6 +940,27 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeSheet(); });
   lg.addEventListener("click",()=>{ lg.classList.remove("play"); void lg.offsetWidth; lg.classList.add("play"); });
 })();
 renderTabs(); renderItems(); update();
+
+/* ---------- Formulaire de contact ---------- */
+(function(){
+  const f=document.getElementById("contactForm"); if(!f) return;
+  const box=document.getElementById("c-msgbox"), btn=document.getElementById("c-send");
+  f.addEventListener("submit", async e=>{
+    e.preventDefault();
+    const nom=f.nom.value.trim(), contact=f.contact.value.trim(), message=f.message.value.trim();
+    if(!nom||!contact||!message){ box.className="cmsg ko"; box.textContent="Merci de remplir les trois champs."; (!nom?f.nom:!contact?f.contact:f.message).focus(); return; }
+    if(!FORM_ENDPOINT){ box.className="cmsg ko"; box.innerHTML="Envoi indisponible pour le moment. Appelez-nous au <a href='tel:+"+PHONE_INTL+"'>"+PHONE_DISPLAY+"</a>."; return; }
+    btn.disabled=true; btn.textContent="Envoi…";
+    try{
+      await fetch(FORM_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify({type:"contact",nom,contact,message,website:f.website.value})});
+      f.reset(); box.className="cmsg ok"; box.textContent="Merci, votre message est bien parti ! Nous vous répondons très vite.";
+    }catch(_){
+      box.className="cmsg ko"; box.innerHTML="L'envoi n'a pas abouti. Appelez-nous au <a href='tel:+"+PHONE_INTL+"'>"+PHONE_DISPLAY+"</a>.";
+    }
+    btn.disabled=false; btn.textContent="Envoyer mon message";
+  });
+})();
 </script>
 </body>
 </html>
