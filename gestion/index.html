@@ -120,6 +120,8 @@ textarea.in-f{min-height:70px;resize:vertical}
 .pcard{cursor:default}
 .pact{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .pill.p-ok{background:rgba(63,193,224,.18);color:#9BE3F2}.pill.p-used{background:rgba(227,176,75,.15);color:#F0C873}.pill.p-ann{background:rgba(255,255,255,.06);color:#888}
+.pill.p-avoir{background:rgba(63,193,224,.15);color:#9BE3F2}
+.btn.danger{background:transparent;border:1px solid #ff8f8f;color:#ff9f9f}
 </style>
 </head>
 <body>
@@ -335,7 +337,9 @@ function editeurFacture(d){
 function actionsFacture(numero){
   const f=S.data.factures.find(x=>x.numero===numero); if(!f){toast("Facture introuvable",1);return;}
   ouvrir(`
-    <div class="sh"><div style="flex:1"><h2>Facture ${esc(f.numero)}</h2><div class="sub">${esc(f.client)} · ${esc(f.date)}</div></div><button class="x" onclick="fermer()">×</button></div>
+    <div class="sh"><div style="flex:1"><h2>${f.type==="Avoir"?"Avoir":"Facture"} ${esc(f.numero)}</h2><div class="sub">${esc(f.client)} · ${esc(f.date)}</div></div><button class="x" onclick="fermer()">×</button></div>
+    ${f.type==="Avoir"?`<p class="pinfo">Cet avoir annule la facture <b>${esc(f.ref)}</b>.</p>`:""}
+    ${f.annuleePar?`<p class="pinfo gold">Facture annulée par l'avoir <b>${esc(f.annuleePar)}</b>.</p>`:""}
     <div class="sec"><ul>
       <li><span>Montant</span><b>${eur(f.total)}</b></li>
       <li><span>Paiement</span><b><span class="pill ${cls(f.paiement)}">${esc(f.paiement)}</span></b></li>
@@ -346,9 +350,14 @@ function actionsFacture(numero){
     <button class="btn sec2" id="send">Envoyer par e-mail</button>
     <button class="btn sec2" id="share">Partager par WhatsApp / SMS</button>
     <div id="shareW"></div>
-    ${f.paiement!=="Payée"?`<div class="sec" style="margin-top:14px"><h3>Encaissement</h3>
+    ${f.paiement==="À payer"&&!f.annuleePar?`<div class="sec" style="margin-top:14px"><h3>Encaissement</h3>
       <select class="in-f" id="pm"><option>espèces</option><option>carte bancaire</option><option>virement</option><option>chèque</option></select>
       <button class="btn" id="paid" style="background:#3fbf7f;color:#06260f">Marquer comme payée</button></div>`:""}
+    ${f.type!=="Avoir"&&!f.annuleePar?`<div class="sec" style="margin-top:14px"><h3>Annuler cette facture</h3>
+      <p class="note" style="margin:0 0 8px">Une facture émise ne se supprime pas : l'avoir l'annule officiellement (PDF numéroté AV-…). ${f.paiement==="Payée"?"Le montant est retiré de votre chiffre encaissé et ":""}les amulettes du client sont retirées ; une remise parrainage ou fidélité utilisée sur cette facture lui est rendue.</p>
+      <label class="lbl" for="avm">Motif (facultatif)</label><input class="in-f" id="avm" placeholder="Ex. : prestation annulée, erreur de facturation…">
+      <label class="tog"><input type="checkbox" id="avd" ${f.idDemande?"checked":"disabled"}> Passer aussi la réservation en « Annulé »</label>
+      <button class="btn danger" id="avoir">Créer un avoir de ${eur(Math.abs(f.total))}</button></div>`:""}
   `);
   $("#open").onclick=async()=>{ const w=window.open("","_blank"); try{ const u=await call("urlFacture",f.numero); if(w) w.location.href=u; else location.href=u; }catch(e){ if(w) w.close(); toast(e.message,1); } };
   $("#send").onclick=async()=>{
@@ -369,6 +378,13 @@ function actionsFacture(numero){
       b.style.display="none";
     }catch(e){ toast(e.message||"Erreur",1); b.disabled=false; b.textContent="Partager par WhatsApp / SMS"; }
   };
+  if($("#avoir")) $("#avoir").onclick=async()=>{
+    const b=$("#avoir");
+    if(b.dataset.ok!=="1"){ b.dataset.ok="1"; b.textContent="Confirmer l'avoir (définitif)"; return; }
+    b.disabled=true; b.textContent="Création de l'avoir…";
+    try{ const r=await call("creerAvoir",f.numero,$("#avm").value.trim(),$("#avd").checked); toast("Avoir "+r.numero+" créé ✓"); await charger(true); actionsFacture(r.numero); }
+    catch(e){ toast(e.message||"Erreur",1); b.disabled=false; b.dataset.ok=""; b.textContent="Créer un avoir"; }
+  };
   if($("#paid")) $("#paid").onclick=async()=>{
     const b=$("#paid");b.disabled=true;
     try{ await call("marquerPayee",f.numero,$("#pm").value); toast("Paiement enregistré ✓"); await charger(true); actionsFacture(f.numero); }
@@ -379,7 +395,7 @@ function actionsFacture(numero){
 /* ---------- vue factures ---------- */
 function vueFactures(){
   const F=S.data.factures;
-  const du=F.filter(f=>f.paiement!=="Payée").reduce((s,f)=>s+f.total,0);
+  const du=F.filter(f=>f.paiement==="À payer").reduce((s,f)=>s+f.total,0);
   const an=new Date().getFullYear(), caAn=F.filter(f=>f.paiement==="Payée"&&String(f.payeeLe||f.date).endsWith(an)).reduce((s,f)=>s+f.total,0);
   $("#view").innerHTML=`
     <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
@@ -390,7 +406,7 @@ function vueFactures(){
     <button class="btn sec2" id="nf" style="margin:0 0 12px">+ Facture sans demande</button>
     <div class="list">${F.length?F.map(f=>`
       <button class="card" data-n="${esc(f.numero)}">
-        <div class="r1"><span class="nm">${esc(f.numero)} · ${esc(f.client)}</span><span class="pill ${cls(f.paiement)}">${esc(f.paiement)}</span></div>
+        <div class="r1"><span class="nm">${esc(f.numero)} · ${esc(f.client)}</span>${f.type==="Avoir"?'<span class="pill p-avoir">Avoir</span>':f.annuleePar?'<span class="pill p-ann">Annulée</span>':`<span class="pill ${cls(f.paiement)}">${esc(f.paiement)}</span>`}</div>
         <div class="r2"><span>${esc(f.date)}</span><b>${eur(f.total)}</b></div>
       </button>`).join(""):'<div class="empty">Aucune facture pour l\'instant.</div>'}</div>`;
   $("#nf").onclick=()=>editeurFacture({});
