@@ -411,7 +411,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
 <!-- CALCULATEUR -->
 <section id="devis">
   <div class="wrap">
-    <div class="amu" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 17C11 17 10 11 10 9a6 6 0 0 1 12 0c0 2-1 8-6 8Z M8 19H24 M16 17V31" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="amu" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 15.5C12.8 12.6 11.6 8.6 12.4 5.6C13.1 3.2 18.9 3.2 19.6 5.6C20.4 8.6 19.2 12.6 16 15.5Z M6.5 18H25.5 M16 15.5V30" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="kicker">Devis express</div>
     <h2>Combien ça coûte ?</h2>
     <p class="sub">Choisissez, on calcule. Aucune inscription.</p>
@@ -552,7 +552,7 @@ footer a{color:var(--gold2);text-decoration:none;font-weight:700}
 <div class="legal cpage" id="contactov" hidden role="dialog" aria-modal="true" aria-labelledby="contact-t">
   <div class="wrap">
     <a class="back" href="#accueil">← Retour au site</a>
-    <div class="amu" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 17C11 17 10 11 10 9a6 6 0 0 1 12 0c0 2-1 8-6 8Z M8 19H24 M16 17V31" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="amu" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 15.5C12.8 12.6 11.6 8.6 12.4 5.6C13.1 3.2 18.9 3.2 19.6 5.6C20.4 8.6 19.2 12.6 16 15.5Z M6.5 18H25.5 M16 15.5V30" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <h2 class="lh" id="contact-t" style="text-align:center">Contactez-nous</h2>
     <p class="cintro">Une question sur un tissu, une tache, un créneau ? Écrivez-nous, on vous répond vite.<br>Pour connaître votre prix, le <a href="#devis">simulateur</a> répond en 30&nbsp;s.</p>
     <form id="contactForm" class="cform" novalidate>
@@ -1194,7 +1194,7 @@ function eShow(){
 function fideliteHTML(f){
   if(!f) return "";
   const n=f.dispo||0, seuil=f.seuil||100, cur=n%seuil, pct=Math.round(cur/seuil*100), rec=f.recompenses||0;
-  const ank='<svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path d="M16 17C11 17 10 11 10 9a6 6 0 0 1 12 0c0 2-1 8-6 8Z M8 19H24 M16 17V31" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>';
+  const ank='<svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path d="M16 15.5C12.8 12.6 11.6 8.6 12.4 5.6C13.1 3.2 18.9 3.2 19.6 5.6C20.4 8.6 19.2 12.6 16 15.5Z M6.5 18H25.5 M16 15.5V30" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>';
   return `<div class="fcard"><span class="lbl">Mes amulettes</span>
     <div class="fnum">${ank}<b>${n}</b><span>amulette${n>1?"s":""}</span></div>
     <div class="fbar" role="progressbar" aria-valuemin="0" aria-valuemax="${seuil}" aria-valuenow="${cur}"><i style="width:${pct}%"></i></div>
