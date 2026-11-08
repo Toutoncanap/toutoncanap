@@ -758,7 +758,7 @@ function renderZone(){
   z.classList.add("show");
   $("#chg").onclick=()=>{ place=null; city.value=""; renderZone(); update(); city.focus(); };
 }
-function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
 /* --- étape 3 : options --- */
 $("#opts").innerHTML = OPTIONS.map(([id,t,d,p])=>`<label class="opt" data-o="${id}"><input type="checkbox" value="${id}"><span class="box"></span><span><b>${t}</b><small>${d}</small></span><em>+${eur(p)}</em></label>`).join("");
