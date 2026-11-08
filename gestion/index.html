@@ -110,6 +110,16 @@ textarea.in-f{min-height:70px;resize:vertical}
 .ib2{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);display:grid;place-items:center}
 .load{text-align:center;color:var(--d);padding:50px 0}
 .note{font-size:12px;color:var(--d);margin-top:8px}
+.pinfo{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(63,193,224,.08);border:1px solid rgba(63,193,224,.3);font-size:13.5px;line-height:1.45}
+.pinfo.gold{background:rgba(227,176,75,.08);border-color:rgba(227,176,75,.4)}
+.suivi{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;padding:10px 12px;border:1px dashed rgba(227,176,75,.4);border-radius:12px;font-size:13.5px}
+.suivi div{display:flex;gap:6px}
+.mini{display:inline-flex;align-items:center;padding:7px 12px;border-radius:99px;border:1px solid #E3B04B;background:transparent;color:#F0C873;font:inherit;font-weight:700;font-size:12.5px;text-decoration:none;cursor:pointer}
+.mini.ghost{border-color:rgba(255,255,255,.2);color:#b9b3c9}
+.tog.gold{color:#F0C873}
+.pcard{cursor:default}
+.pact{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pill.p-ok{background:rgba(63,193,224,.18);color:#9BE3F2}.pill.p-used{background:rgba(227,176,75,.15);color:#F0C873}.pill.p-ann{background:rgba(255,255,255,.06);color:#888}
 </style>
 </head>
 <body>
@@ -123,6 +133,7 @@ textarea.in-f{min-height:70px;resize:vertical}
   <div class="tabs">
     <button class="tab on" data-v="dem">Demandes</button>
     <button class="tab" data-v="fac">Factures</button>
+    <button class="tab" data-v="par">Parrainages</button>
   </div>
   <div id="view"><div class="load">Chargement…</div></div>
 </main>
@@ -178,7 +189,7 @@ document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelect
 $("#refresh").onclick=()=>charger();
 $("#fab").onclick=nouvelleDemande;
 
-function rendre(){ if(!S.data) return; S.view==="dem"?vueDemandes():vueFactures(); }
+function rendre(){ if(!S.data) return; S.view==="dem"?vueDemandes():S.view==="par"?vueParrainages():vueFactures(); }
 
 /* ---------- vue demandes ---------- */
 function vueDemandes(){
@@ -202,7 +213,7 @@ function vueDemandes(){
     <div class="chips">${chips.map(([k,t])=>`<button class="chip ${S.filtre===k?"on":""}" data-f="${esc(k)}">${esc(t)}</button>`).join("")}</div>
     <div class="list">${L.length?L.map(d=>`
       <button class="card" data-id="${esc(d.id)}">
-        <div class="r1"><span class="nm">${esc(d.nom)}</span><span class="pill ${cls(d.statut)}">${esc(d.statut)}</span></div>
+        <div class="r1"><span class="nm">${esc(d.nom)}${d.remisesParrain?' <span title="Remise parrainage disponible">🎁</span>':""}${S.data.fidelite&&d.amulettes>=S.data.fidelite.SEUIL?' <span title="10 € fidélité disponibles">☥</span>':""}${d.parrain?' <span title="Parrainé">🤝</span>':""}</span><span class="pill ${cls(d.statut)}">${esc(d.statut)}</span></div>
         <div class="r2"><span>${esc(d.commune||"—")} · ${d.rdv?"RDV "+esc(fmtRdv(d.rdv)):esc(d.date||d.recue)}</span><b>${esc(d.total||"")}</b></div>
       </button>`).join(""):'<div class="empty">Aucune demande ici.</div>'}</div>`;
   $("#q").oninput=e=>{S.q=e.target.value;const p=e.target.selectionStart;vueDemandes();const i=$("#q");i.focus();i.setSelectionRange(p,p);};
@@ -234,11 +245,16 @@ function detail(id){
       ${d.total?`<p style="margin-top:6px">Estimation : <b style="color:var(--g2)">${esc(d.total)}</b></p>`:""}
       ${d.message?`<p style="margin-top:8px">« ${esc(d.message)} »</p>`:""}
       ${d.photos?`<p style="margin-top:8px"><a href="${esc(d.photos)}" target="_blank">Voir les photos ↗</a></p>`:""}
+      ${d.parrain?`<p class="pinfo">🤝 Parrainé par le code <b>${esc(d.parrain)}</b> : −10 % déjà inclus dans l'estimation. La remise du parrain se débloque automatiquement quand ce dossier est payé.</p>`:""}
+      ${d.email&&S.data.fidelite?`<p class="pinfo">☥ <b>${d.amulettes||0} amulette${(d.amulettes||0)>1?"s":""}</b> disponibles${d.amulettes>=S.data.fidelite.SEUIL?` : <b>${S.data.fidelite.VALEUR} € de remise</b> à utiliser sur sa facture.`:` (${S.data.fidelite.VALEUR} € offerts à ${S.data.fidelite.SEUIL}).`}</p>`:""}
+      ${d.remisesParrain?`<p class="pinfo gold">🎁 Ce client a <b>${d.remisesParrain} remise${d.remisesParrain>1?"s":""} parrainage de −${S.data.remiseParrain||10}\u00a0%</b> à utiliser : cochez-la en créant sa facture.</p>`:""}
     </div>
     <div class="sec"><h3>Suivi</h3>
       <div class="st" id="st">${S.data.statuts.map(s=>`<button class="${s===d.statut?"on":""}" data-s="${esc(s)}">${esc(s)}</button>`).join("")}</div>
       <label class="lbl" for="rdv">Rendez-vous</label><input class="in-f" id="rdv" type="datetime-local" value="${esc(d.rdv)}">
-      <label class="lbl" for="notes">Notes</label><textarea class="in-f" id="notes">${esc(d.notes)}</textarea>
+      <label class="lbl" for="notes">Notes (privées)</label><textarea class="in-f" id="notes">${esc(d.notes)}</textarea>
+      <label class="lbl" for="mcl">Message visible par le client (espace client)</label><textarea class="in-f" id="mcl" placeholder="Ex. : je serai là à 10 h, pensez à libérer l'accès au canapé.">${esc(d.messageClient||"")}</textarea>
+      ${d.suivi?`<div class="suivi"><span>Lien de suivi client</span><div><button type="button" class="mini" id="cpS">Copier</button><a class="mini" target="_blank" href="https://wa.me/${intl(d.tel)}?text=${encodeURIComponent("Bonjour "+String(d.nom).split(" ")[0]+", suivez votre réservation Toutoncanap ici : https://toutoncanap.fr/#suivi="+d.suivi)}">WhatsApp</a></div></div>`:""}
       <div class="two">
         <div><label class="lbl" for="tel">Téléphone</label><input class="in-f" id="tel" value="${esc(d.tel)}"></div>
         <div><label class="lbl" for="mail">E-mail</label><input class="in-f" id="mail" type="email" value="${esc(d.email)}"></div>
@@ -251,10 +267,11 @@ function detail(id){
   document.querySelectorAll("#st [data-s]").forEach(b=>b.onclick=()=>{statut=b.dataset.s;document.querySelectorAll("#st [data-s]").forEach(x=>x.classList.toggle("on",x===b));});
   $("#save").onclick=async()=>{
     const btn=$("#save");btn.disabled=true;btn.textContent="Enregistrement…";
-    const patch={statut,rdv:$("#rdv").value,notes:$("#notes").value,tel:$("#tel").value.trim(),email:$("#mail").value.trim()};
+    const patch={statut,rdv:$("#rdv").value,notes:$("#notes").value,messageClient:$("#mcl").value,tel:$("#tel").value.trim(),email:$("#mail").value.trim()};
     try{ await call("majDemande",d.id,patch); Object.assign(d,patch); toast("Enregistré ✓"); fermer(); rendre(); }
     catch(e){ toast(e.message||"Erreur",1); btn.disabled=false; btn.textContent="Enregistrer"; }
   };
+  if($("#cpS")) $("#cpS").onclick=async()=>{ try{ await navigator.clipboard.writeText("https://toutoncanap.fr/#suivi="+d.suivi); toast("Lien copié ✓"); }catch(_){ toast("Copie impossible",1); } };
   if($("#cf")) $("#cf").onclick=()=>editeurFacture(d);
   if($("#vf")) $("#vf").onclick=()=>actionsFacture(d.facture);
 }
@@ -282,6 +299,8 @@ function editeurFacture(d){
       <button class="add" id="addl">+ Ajouter une ligne</button>
       <div class="totline"><span style="font-weight:800">Total</span><b id="tot">0 €</b></div>
       <p class="note">TVA non applicable, article 293 B du CGI.</p>
+      ${d.remisesParrain?`<label class="tog gold"><input type="checkbox" id="frp" checked> Appliquer la remise parrainage (−${S.data.remiseParrain||10}\u00a0%) — ${d.remisesParrain} disponible${d.remisesParrain>1?"s":""}</label>`:""}
+      ${S.data.fidelite&&d.amulettes>=S.data.fidelite.SEUIL?`<label class="tog gold"><input type="checkbox" id="ffi" checked> Utiliser ${S.data.fidelite.SEUIL} amulettes (−${S.data.fidelite.VALEUR}\u00a0€) — ${d.amulettes} disponibles</label>`:""}
       <label class="tog"><input type="checkbox" id="fp"> Déjà payée</label>
       <div id="modeW" style="display:none"><label class="lbl" for="fmode">Mode de paiement</label>
         <select class="in-f" id="fmode"><option>espèces</option><option>carte bancaire</option><option>virement</option><option>chèque</option></select></div>
@@ -305,7 +324,7 @@ function editeurFacture(d){
   draw();
   $("#gen").onclick=async()=>{
     const f={idDemande:d.id||"",client:$("#fc").value.trim(),adresse:$("#fa").value.trim(),email:$("#fm").value.trim(),tel:$("#ft").value.trim(),
-      datePrestation:$("#fd").value,lignes:lignes.map(l=>({designation:l.designation,qte:Number(l.qte),pu:Number(l.pu)})),payee:$("#fp").checked,mode:$("#fp").checked?$("#fmode").value:""};
+      datePrestation:$("#fd").value,lignes:lignes.map(l=>({designation:l.designation,qte:Number(l.qte),pu:Number(l.pu)})),payee:$("#fp").checked,mode:$("#fp").checked?$("#fmode").value:"",remiseParrainage:!!($("#frp")&&$("#frp").checked),recompenseFidelite:!!($("#ffi")&&$("#ffi").checked)};
     const b=$("#gen");b.disabled=true;b.textContent="Création du PDF…";
     try{ const r=await call("creerFacture",f); toast("Facture "+r.numero+" créée ✓"); await charger(true); actionsFacture(r.numero); }
     catch(e){ toast(e.message||"Erreur",1); b.disabled=false; b.textContent="Créer la facture"; }
@@ -376,6 +395,37 @@ function vueFactures(){
       </button>`).join(""):'<div class="empty">Aucune facture pour l\'instant.</div>'}</div>`;
   $("#nf").onclick=()=>editeurFacture({});
   document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>actionsFacture(b.dataset.n));
+}
+
+/* ---------- vue parrainages ---------- */
+function vueParrainages(){
+  const P=S.data.parrainages||[], n=st=>P.filter(p=>p.statut===st).length;
+  const lib={"En attente":"Filleul pas encore servi","Disponible":"Remise à donner","Utilisée":"Remise utilisée","Annulée":"Annulée"};
+  const L=S.pf&&S.pf!=="tous"?P.filter(p=>p.statut===S.pf):P;
+  $("#view").innerHTML=`
+    <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><b>${n("En attente")}</b><span>En attente</span></div>
+      <div class="kpi"><b>${n("Disponible")}</b><span>Remises à donner</span></div>
+      <div class="kpi"><b>${n("Utilisée")}</b><span>Utilisées</span></div>
+    </div>
+    <p class="note" style="margin:0 0 10px">Le filleul a −${S.data.remiseParrain||10}\u00a0% sur son premier rendez-vous (déjà dans son estimation). Le parrain gagne −${S.data.remiseParrain||10}\u00a0% quand le dossier du filleul est payé (e-mail automatique) : la remise est cochée d'office sur sa prochaine facture, ou marquez-la utilisée ici.</p>
+    <div class="chips">${[["tous","Tout"],["Disponible","À donner"],["En attente","En attente"],["Utilisée","Utilisées"],["Annulée","Annulées"]].map(([k,t])=>`<button class="chip ${(S.pf||"tous")===k?"on":""}" data-pf="${k}">${t}</button>`).join("")}</div>
+    <div class="list">${L.length?L.map(p=>`
+      <div class="card pcard">
+        <div class="r1"><span class="nm">${esc(p.parrain)} → ${esc(p.filleul)}</span><span class="pill ${p.statut==="Disponible"?"p-ok":p.statut==="Utilisée"?"p-used":p.statut==="Annulée"?"p-ann":""}">${esc(lib[p.statut]||p.statut)}</span></div>
+        <div class="r2"><span>Code ${esc(p.code)} · ${esc(p.date)}${p.facture?" · facture "+esc(p.facture):""}</span></div>
+        <div class="pact">
+          ${p.statut==="Disponible"?`<button class="mini" data-pa="utiliser" data-l="${p.ligne}">Marquer utilisée</button>`:""}
+          ${p.statut==="Utilisée"||p.statut==="Annulée"?`<button class="mini" data-pa="retablir" data-l="${p.ligne}">Rétablir</button>`:""}
+          ${p.statut!=="Annulée"&&p.statut!=="Utilisée"?`<button class="mini ghost" data-pa="annuler" data-l="${p.ligne}">Annuler</button>`:""}
+        </div>
+      </div>`).join(""):'<div class="empty">Aucun parrainage pour l\'instant.</div>'}</div>`;
+  document.querySelectorAll("[data-pf]").forEach(b=>b.onclick=()=>{S.pf=b.dataset.pf;vueParrainages();});
+  document.querySelectorAll("[data-pa]").forEach(b=>b.onclick=async()=>{
+    b.disabled=true;
+    try{ await call("gererParrainage",+b.dataset.l,b.dataset.pa); toast("C'est noté ✓"); await charger(true); }
+    catch(e){ toast(e.message||"Erreur",1); b.disabled=false; }
+  });
 }
 
 /* ---------- ajout manuel ---------- */
