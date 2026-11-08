@@ -1070,7 +1070,8 @@ function conseilsHTML(d){
 /* --- rendu d'une réservation --- */
 function frise(d){
   if(d.annule) return `<div class="fr-ann">Réservation annulée</div>`;
-  return `<ol class="frise">${d.etapes.map((e,i)=>`<li class="${i<d.etape?"ok":i===d.etape?"cur":""}"><span class="dot">${i<d.etape?"✓":i+1}</span><span class="lb">${e}</span></li>`).join("")}</ol>`;
+  const fin=d.etape>=d.etapes.length-1;
+  return `<ol class="frise">${d.etapes.map((e,i)=>`<li class="${i<d.etape||fin?"ok":i===d.etape?"cur":""}"><span class="dot">${i<d.etape||fin?"✓":i+1}</span><span class="lb">${e}</span></li>`).join("")}</ol>`;
 }
 function resaHTML(d,avecActions){
   const art=(d.lignes||[]).filter(l=>l.pu>0&&!/d[ée]placement|compl[ée]ment/i.test(l.designation)).map(l=>`${l.qte} × ${esc(String(l.designation).replace(/^Nettoyage — /,""))}`).join("<br>");
@@ -1199,7 +1200,7 @@ function fideliteHTML(f){
     <div class="fbar" role="progressbar" aria-valuemin="0" aria-valuemax="${seuil}" aria-valuenow="${cur}"><i style="width:${pct}%"></i></div>
     <p class="fnext">${rec?"":`Plus que <b>${seuil-cur}</b> amulette${seuil-cur>1?"s":""} avant vos ${f.valeur} € offerts.`}</p>
     ${rec?`<div class="pgain">🎁 <b>${rec*f.valeur} € de remise</b> à utiliser : ils seront déduits de votre prochaine prestation.</div>`:""}
-    <p class="calt sm" style="text-align:center">1 € réglé = 1 amulette ☥ · ${seuil} amulettes = ${f.valeur} € offerts sur votre prochaine prestation.</p>
+    <p class="calt sm" style="text-align:center">1 € réglé = 1 amulette · ${seuil} amulettes = ${f.valeur} € offerts sur votre prochaine prestation.</p>
   </div>`;
 }
 function confirmBox(t){ return window.confirm(t); }
