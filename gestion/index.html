@@ -213,7 +213,7 @@ function vueDemandes(){
     <div class="chips">${chips.map(([k,t])=>`<button class="chip ${S.filtre===k?"on":""}" data-f="${esc(k)}">${esc(t)}</button>`).join("")}</div>
     <div class="list">${L.length?L.map(d=>`
       <button class="card" data-id="${esc(d.id)}">
-        <div class="r1"><span class="nm">${esc(d.nom)}${d.remisesParrain?' <span title="Remise parrainage disponible">🎁</span>':""}${S.data.fidelite&&d.amulettes>=S.data.fidelite.SEUIL?' <span title="10 € fidélité disponibles">☥</span>':""}${d.parrain?' <span title="Parrainé">🤝</span>':""}</span><span class="pill ${cls(d.statut)}">${esc(d.statut)}</span></div>
+        <div class="r1"><span class="nm">${esc(d.nom)}${d.remisesParrain?' <span title="Remise parrainage disponible">🎁</span>':""}${S.data.fidelite&&d.amulettes>=S.data.fidelite.SEUIL?' <span title="10 € fidélité disponibles"><svg viewBox=\"0 0 32 32\" width=\"14\" height=\"14\" style=\"vertical-align:-2px\" aria-hidden=\"true\"><path d=\"M16 17C11 17 10 11 10 9a6 6 0 0 1 12 0c0 2-1 8-6 8Z M8 19H24 M16 17V31\" stroke=\"#E3B04B\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/></svg></span>':""}${d.parrain?' <span title="Parrainé">🤝</span>':""}</span><span class="pill ${cls(d.statut)}">${esc(d.statut)}</span></div>
         <div class="r2"><span>${esc(d.commune||"—")} · ${d.rdv?"RDV "+esc(fmtRdv(d.rdv)):esc(d.date||d.recue)}</span><b>${esc(d.total||"")}</b></div>
       </button>`).join(""):'<div class="empty">Aucune demande ici.</div>'}</div>`;
   $("#q").oninput=e=>{S.q=e.target.value;const p=e.target.selectionStart;vueDemandes();const i=$("#q");i.focus();i.setSelectionRange(p,p);};
@@ -246,7 +246,7 @@ function detail(id){
       ${d.message?`<p style="margin-top:8px">« ${esc(d.message)} »</p>`:""}
       ${d.photos?`<p style="margin-top:8px"><a href="${esc(d.photos)}" target="_blank">Voir les photos ↗</a></p>`:""}
       ${d.parrain?`<p class="pinfo">🤝 Parrainé par le code <b>${esc(d.parrain)}</b> : −10 % déjà inclus dans l'estimation. La remise du parrain se débloque automatiquement quand ce dossier est payé.</p>`:""}
-      ${d.email&&S.data.fidelite?`<p class="pinfo">☥ <b>${d.amulettes||0} amulette${(d.amulettes||0)>1?"s":""}</b> disponibles${d.amulettes>=S.data.fidelite.SEUIL?` : <b>${S.data.fidelite.VALEUR} € de remise</b> à utiliser sur sa facture.`:` (${S.data.fidelite.VALEUR} € offerts à ${S.data.fidelite.SEUIL}).`}</p>`:""}
+      ${d.email&&S.data.fidelite?`<p class="pinfo"><svg viewBox="0 0 32 32" width="14" height="14" style="vertical-align:-2px" aria-hidden="true"><path d="M16 17C11 17 10 11 10 9a6 6 0 0 1 12 0c0 2-1 8-6 8Z M8 19H24 M16 17V31" stroke="#E3B04B" stroke-width="3" fill="none" stroke-linecap="round"/></svg> <b>${d.amulettes||0} amulette${(d.amulettes||0)>1?"s":""}</b> disponibles${d.amulettes>=S.data.fidelite.SEUIL?` : <b>${S.data.fidelite.VALEUR} € de remise</b> à utiliser sur sa facture.`:` (${S.data.fidelite.VALEUR} € offerts à ${S.data.fidelite.SEUIL}).`}</p>`:""}
       ${d.remisesParrain?`<p class="pinfo gold">🎁 Ce client a <b>${d.remisesParrain} remise${d.remisesParrain>1?"s":""} parrainage de −${S.data.remiseParrain||10}\u00a0%</b> à utiliser : cochez-la en créant sa facture.</p>`:""}
     </div>
     <div class="sec"><h3>Suivi</h3>
